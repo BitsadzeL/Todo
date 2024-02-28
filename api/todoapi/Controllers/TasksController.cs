@@ -94,5 +94,35 @@ public async Task<IActionResult> DeleteTask(int id)
 }
 
 
+[HttpPut("UpdateTaskStatus/{id}")]
+public async Task<IActionResult> UpdateTaskStatus(int id, [FromBody] string status)
+{
+    try
+    {
+        // Find the task with the specified id
+        var task = await _DBContext.Tasks.FindAsync(id);
+        
+        if (task == null)
+        {
+            return NotFound($"Task with ID {id} not found");
+        }
+
+        // Update the status of the task
+        task.Completed = status;
+
+        // Save changes to the database
+        await _DBContext.SaveChangesAsync();
+
+        // Return the updated task
+        return Ok(task);
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, $"An error occurred while updating the task status: {ex.Message}");
+    }
+}
+
+
+
 
 }

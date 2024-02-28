@@ -9,7 +9,7 @@ public class Task
     public string? Description { get; set; }
 
 
-    [DefaultValue("false")]
+    [DefaultValue("Active")]
     public string? Completed { get; set; }
 
 

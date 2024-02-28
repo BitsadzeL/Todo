@@ -35,7 +35,7 @@ export class HomeComponent {
   onAddTask(task: any) {
     const taskToAdd = {
       description: this.newTask,
-      completed: "false"
+      completed: "Active"
     };
     this.service.addNewTask(taskToAdd).subscribe(
       response => {
@@ -56,6 +56,22 @@ export class HomeComponent {
       this.tasks = data;
     });
   }
+
+
+  onCompleteTask(taskId: number, status: string) {
+    this.service.updateTaskStatus(taskId, status).subscribe(
+      () => {
+        console.log('Task status updated successfully');
+        this.fetchTasks();
+      },
+      (error) => {
+        console.error('Error updating task status:', error);
+      }
+    );
+  }
+  
+  
+  
 
 
 }

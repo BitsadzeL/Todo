@@ -1,26 +1,60 @@
-<p>home works!</p>
+<h3>Todo App</h3>
 
 
 <form action="">
-    <input type="text" name="newTask" id="" [(ngModel)]="newTask">
-    <button (click)="onAddTask(newTask)">ADD</button>
-    <p>task: {{newTask}}</p>
+
+
+    <div class="form-row" style="margin-top:10px">
+        <div class="form-group col-md-3 d-flex justify-content-center align-items-center mx-auto text-center">
+            <input  type="email" class="form-control" id="newtask" name="newtask" placeholder="Enter task here" [(ngModel)]="newTask">
+            <button class="btn btn-primary" (click)="onAddTask(newTask)">Save</button>
+        </div>
+    </div>
+    
+    
+    
+
+
 </form>
 
-<table border="1">
-    <tr>
-        <td>id</td>
-        <td>task</td>
-        <td>completed</td>
-        <td>action</td>
-    </tr>
 
-    <tr *ngFor="let task of tasks">
-        <td>{{task.id}}</td>
-        <td>{{task.description}}</td>
-        <td>{{task.completed}}</td>
-        <td><button (click)="onDeleteTask(task.id)">DELETE</button></td>
-    </tr>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Task</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks" [ngStyle]="{ 'background-color': task.completed == 'Active' ? '#fa7070' : '#84ff82' }">
+            <td>{{task.id}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.completed}}</td>
+            <td>
+                <button (click)="onDeleteTask(task.id)" class="btn btn-danger">DELETE</button>
+                <button (click)="onCompleteTask(task.id,task.completed)" class="btn btn-success">Change status</button>
+            </td>
+        </tr>
+    </tbody>
 </table>
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
